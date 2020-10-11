@@ -8,15 +8,18 @@ public class Item {
     private double additionalPower;
     private boolean isWorn;
     private String type;
+    private boolean wearable;
 
-    public Item(String name, int latestCode) {
+    public Item(String name, String type, int latestCode) {
         Main.itemCode++;
         this.name = name;
         code += latestCode;
         isWorn = false;
+        setType(type);
         setAppropriatePower();
         setAdditionalPower();
         setPower();
+        setWearable();
     }
 
     // getter
@@ -26,10 +29,23 @@ public class Item {
     public double getFixedPower() { return fixedPower; }
     public double getAdditionalPower() { return additionalPower; }
     public boolean getIsWorn() { return isWorn; }
+    public String getType() { return type; }
+    public boolean getWearable() { return wearable; }
 
     // setter
     public void setFixedPower(double power) { this.fixedPower = power; }
     public void setIsWorn(boolean state) { isWorn = state; } 
+    public void setType(String type) { this.type = type; } 
+
+    public void setWearable() { 
+        String[] wearableType = new String[10];
+        wearableType[0] = "weapon";
+
+        wearable = false;
+
+        for (String t : wearableType)
+            if (type == t) wearable = true;
+    } 
 
     // set weapon-based attack figure
     public void setAppropriatePower() {
@@ -51,7 +67,7 @@ public class Item {
     // print all information of the item
     public void printItemInfo() {
         System.out.println("-------------------------------");
-        System.out.println("Item: " + getName());
+        System.out.println("Item: " + getName() + "(" + getType() + ")");
         // System.out.println("Code: " + getCode());
         System.out.println("Power: " + String.format("%.2f", getPower()) + "(=" + getFixedPower() + "+" + String.format("%.2f", getAdditionalPower()) + ")");
         System.out.println("-------------------------------");

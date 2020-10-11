@@ -7,6 +7,6 @@ public class Inventory {
         this.amount = amount;
     }
 
-    public Item getItems() { return item; }
+    public Item getItem() { return item; }
     public int getAmount() { return amount; }
 }
